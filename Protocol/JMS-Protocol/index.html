@@ -1,0 +1,597 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=light>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Andy Zhang">
+  <meta name="keywords" content="Java, Programming">
+  
+    <meta name="description" content="简介JMS 是 Sun Microsystems 公司通过 JSR-914 项目创建的一种企业消息传送 API。JMS 自身 并不是一种消息传送系统;它是消息传送客户端和消息传送系统通信时所需接口和类的一 个抽象。与 JDBC 抽象(JDBC abstract)访问关系数据库、JNDI 抽象访问命名和目录服务 的方式一样,JMS 抽象可以访问消息提供者。使用 JMS,应用程序的消息传送客户端可以">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JMS协议JMS">
+<meta property="og:url" content="https://ivivisoft.com/Protocol/JMS-Protocol/index.html">
+<meta property="og:site_name" content="IvIvI">
+<meta property="og:description" content="简介JMS 是 Sun Microsystems 公司通过 JSR-914 项目创建的一种企业消息传送 API。JMS 自身 并不是一种消息传送系统;它是消息传送客户端和消息传送系统通信时所需接口和类的一 个抽象。与 JDBC 抽象(JDBC abstract)访问关系数据库、JNDI 抽象访问命名和目录服务 的方式一样,JMS 抽象可以访问消息提供者。使用 JMS,应用程序的消息传送客户端可以">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ivivisoft.com/Protocol/JMS-Protocol/%E5%85%AC%E5%85%B1API.png">
+<meta property="og:image" content="https://ivivisoft.com/Protocol/JMS-Protocol/%E7%82%B9%E5%AF%B9%E7%82%B9API.png">
+<meta property="og:image" content="https://ivivisoft.com/Protocol/JMS-Protocol/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E5%BC%8FAPI.png">
+<meta property="og:image" content="https://ivivisoft.com/Protocol/JMS-Protocol/%E5%8A%A8%E6%80%81%E7%B3%BB%E7%BB%9F.png">
+<meta property="og:image" content="https://ivivisoft.com/Protocol/JMS-Protocol/%E5%8A%A8%E6%80%81%E7%B3%BB%E7%BB%9F2.png">
+<meta property="og:image" content="https://ivivisoft.com/Protocol/JMS-Protocol/%E5%8A%A8%E6%80%81%E7%B3%BB%E7%BB%9F3.png">
+<meta property="og:image" content="https://ivivisoft.com/Protocol/JMS-Protocol/RPC%E7%B3%BB%E7%BB%9F.png">
+<meta property="og:image" content="https://ivivisoft.com/Protocol/JMS-Protocol/%E4%BC%81%E4%B8%9A%E6%B6%88%E6%81%AF%E4%BC%A0%E9%80%81.png">
+<meta property="og:image" content="https://ivivisoft.com/Protocol/JMS-Protocol/%E4%BF%9D%E5%AD%98%E5%B9%B6%E8%BD%AC%E5%8F%91%E6%9C%BA%E5%88%B6.png">
+<meta property="article:published_time" content="2022-02-03T07:50:41.000Z">
+<meta property="article:modified_time" content="2022-02-26T09:31:41.448Z">
+<meta property="article:author" content="Andy Zhang">
+<meta property="article:tag" content="JMS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ivivisoft.com/Protocol/JMS-Protocol/%E5%85%AC%E5%85%B1API.png">
+  
+  
+  <title>JMS协议JMS - IvIvI</title>
+  <!-- anti-flicker snippet (recommended)  -->
+<style>.async-hide { opacity: 0 !important} </style>
+<script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
+h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
+(a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
+})(window,document.documentElement,'async-hide','dataLayer',4000,
+{'GTM-T9HKC8K':true});</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-T9HKC8K');</script>
+  <!-- End Google Tag Manager -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8488991078175700"
+     crossorigin="anonymous"></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"ivivisoft.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="IvIvI" type="application/atom+xml">
+</head>
+
+
+<body>
+  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T9HKC8K"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>IvIvI</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.2)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JMS协议JMS">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-02-03 15:50" pubdate>
+        2022年2月3日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      8.4k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      71 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JMS协议JMS</h1>
+            
+            <div class="markdown-body">
+              <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>JMS 是 Sun Microsystems 公司通过 JSR-914 项目创建的一种企业消息传送 API。JMS 自身 并不是一种消息传送系统;它是消息传送客户端和消息传送系统通信时所需接口和类的一 个抽象。与 JDBC 抽象(JDBC abstract)访问关系数据库、JNDI 抽象访问命名和目录服务 的方式一样,JMS 抽象可以访问消息提供者。使用 JMS,应用程序的消息传送客户端可以 实现跨消息服务器产品的移植</p>
+<h3 id="JMS-API的组成"><a href="#JMS-API的组成" class="headerlink" title="JMS API的组成"></a>JMS API的组成</h3><p>JMS API 可以分为 3 个主要部分:公共 API、点对点 API 和发布&#x2F;订阅 API。在 JMS1.1 中, 公共 API 可被用于向一个队列或一个主题发送消息,或从其中接收消息。点对点 API 专 门用于使用队列的消息传送,而发布&#x2F;订阅 API 则专门用于使用主题的消息传送</p>
+<h4 id="公共API"><a href="#公共API" class="headerlink" title="公共API"></a>公共API</h4><p>在 JMS 公共 API 内部,和发送和接收 JMS 消息有关的 JMS API 接口主要有 7 个:</p>
+<ul>
+<li>ConnectionFactory</li>
+<li>Destination</li>
+<li>Connection</li>
+<li>Session</li>
+<li>Message</li>
+<li>MessageProducer</li>
+<li>MessageConsumer</li>
+</ul>
+<p>在这些公共接口中,ConnectionFactory 和 Destination 必须使用 JNDI(遵照 JMS 规 范要求)从提供者处获得。其他接口则可以通过工厂方法在不同的 API 接口中创建。举例 来说,一旦有了一个 ConnectionFactory,就可以创建一个 Connection。一旦有了一个 Connection,就可以创建一个 Session。而一旦有了一个 Session,就可以创建一个 Message、MessageProducer 和 MessageConsumer。这七个API的关系如图所示：</p>
+<p><img src="/Protocol/JMS-Protocol/%E5%85%AC%E5%85%B1API.png" srcset="/img/loading.gif" lazyload alt="公共API.png"></p>
+<p>在 JMS 中,是 Session 对象保存着用于消息传送的事务性工作单元(transactional unit), 而不是 Connection 对象。这和 JDBC 不同,JDBC 中是 Connection 对象保存事务性工 作单元。这就意味着在使用 JMS 时,一个应用程序通常只会有一个 Connection 对象,但 是它可以有一个 Session 对象池。</p>
+<h4 id="点对点API"><a href="#点对点API" class="headerlink" title="点对点API"></a>点对点API</h4><p>点对点消息 传送模型 API 特指 JMS API 之内基于队列的接口。下面是用于向一个队列发送和从一个 队列接收消息的接口:</p>
+<ul>
+<li>QueueConnectionFactory</li>
+<li>Queue</li>
+<li>QueueConnection</li>
+<li>QueueSession</li>
+<li>Message</li>
+<li>QueueSender</li>
+<li>QueueReceiver</li>
+</ul>
+<p>下图显示了基于队列的 JMS API 接口之间的流程和关系：</p>
+<p><img src="/Protocol/JMS-Protocol/%E7%82%B9%E5%AF%B9%E7%82%B9API.png" srcset="/img/loading.gif" lazyload alt="点对点API.png"></p>
+<h4 id="发布-x2F-订阅-API"><a href="#发布-x2F-订阅-API" class="headerlink" title="发布&#x2F;订阅 API"></a>发布&#x2F;订阅 API</h4><p>由于基于主题的 JMS API 类似于基于队列的 API,发布&#x2F;订阅消息传送模型内部使用的接口如下:</p>
+<ul>
+<li>TopicConnectionFactory</li>
+<li>Topic</li>
+<li>TopicConnection</li>
+<li>TopicSession</li>
+<li>Message</li>
+<li>TopicPublisher</li>
+<li>TopicSubscriber<br>请注意:除了 TopicPublisher 和 TopicSubscriber 不同以外,发布&#x2F;订阅域中的接口和 p2p 域中的那些接口名称基本类似。JMS API 在这一点上非常明显。正如本章开始时所述 的那样,发布&#x2F;订阅模型使用主题、发布者和订阅者这些术语,而 p2p 模型使用的则是队 列、发送者和接收者。请注意这些术语是如何和 API 接口名称相匹配的。基于主题的 JMS API 接口的关系和流程如下图所示：</li>
+</ul>
+<p><img src="/Protocol/JMS-Protocol/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E5%BC%8FAPI.png" srcset="/img/loading.gif" lazyload alt="发布订阅式API.png"></p>
+<h3 id="实际场景"><a href="#实际场景" class="headerlink" title="实际场景"></a>实际场景</h3><h4 id="面向服务体系结构（Service-Oriented-Architecture）"><a href="#面向服务体系结构（Service-Oriented-Architecture）" class="headerlink" title="面向服务体系结构（Service-Oriented Architecture）"></a>面向服务体系结构（Service-Oriented Architecture）</h4><p>面向服务体系结构(Service-Oriented Architecture,SOA)作为一种体系结构体系,定义了 从对应的企业服务实现中抽象出来的业务服务。因此,SOA 已经促生了一种称为企业服 务总线(ESB)的新类型中间件。在 SOA 发展的早期阶段,大多数 ESB 是作为消息代理 实现的,由此,消息传送层内部的组件会用于执行某种智能路由选择,或者用于在传送消 息之前进行消息转换。这些早期的消息代理,已经发展成为成熟的商业 ESB 产品和开源 ESB 产品,它们在核心之处使用了消息传送机制。尽管某些 ESB 产品能够支持传统的非 JMS 型 HTTP 传送,但是,大多数企业级产品的实现仍然采用消息传送作为通信协议。</p>
+<p>在需要将业务服务从其底层实现中完全抽象出来的 SOA 内部构建抽象层时,消息传送是 一种极好的手段。使用消息传送机制,业务服务无须关心对应的实现服务位于何处、使用 哪种语言编程、在哪种平台上部署,甚至不需要关心实现服务的名称。消息传送机制还提 供了在 SOA 环境内部所需的可伸缩性,另外,它还对进、出 ESB 的请求提供了一种健壮 的监控手段。现在,几乎所有可用的商业 ESB 产品和开源 ESB 产品都支持 JMS 消息传送 作为一种通信协议——最值得注意的例外就是 Microsoft 公司的消息传送产品系列(例如, BizTalk 和 MSMQ)。</p>
+<p>业内对于 SOA 的热衷和应用,反过来又掀起了普遍使用消息传送解决方案的热潮。尽管 完全成熟的 SOA 实现尚在不断发展之中,许多公司就已经开始转向消息传送解决方案, 将其作为迈向 SOA 的其中一步。</p>
+<h4 id="事件驱动体系结构-（Event-Driven-Architecture）"><a href="#事件驱动体系结构-（Event-Driven-Architecture）" class="headerlink" title="事件驱动体系结构 （Event-Driven Architecture）"></a>事件驱动体系结构 （Event-Driven Architecture）</h4><p>事件驱动体系结构(EDA)作为一种体系结构体系,它建立在下列前提之上:进程和事件 编排是动态的和非常复杂的,因而通过一个中央编排组件来控制或实现是不可行的。当系 统中发生了一个活动时,该进程将向整个系统发送一个事件,以此指示发生了一个活动(一 个事件)。这个事件接下来可能会启动(kick off)其他进程,这些进程又可以依次启动附 加的进程,所有进程都会相互去耦。</p>
+<p>在 EDA 的一些优秀范例中,包括了保险领域和养老金固定收益领域。这些行业领域都是 由发生在该系统中的事件来驱动的。像修改您的地址这样一些简单的事情,也会影响到保 险领域的许多方面,其中包括政策、报价及消费者记录等。在这个例子中,保险应用程序 中的驱动事件就是修改地址。然而,修改地址模块并无责任去知道该事件所导致的一切后 果。因此,该修改地址模块仅仅发送一条事件消息,让系统知道修改了某个地址。报价系 统将获知这个事件,并对提供给该消费者的所有未执行报价进行调整。同时,政策系统将 获知这个地址修改事件,并调整该消费者的费率和适用政策。</p>
+<p>EDA 的另一个例子是在养老金固定收益领域。结婚或变换工作会触发系统中的某个事件, 它使您有资格对自己的健康和退休金信息进行某些修改。许多系统会使用 EDA,以此来 避免使用一个庞大、复杂而且难以维护的中央处理引擎来控制与特定的“合格事件”有关 的所有活动。</p>
+<p>消息传送机制是基于事件驱动体系结构系统的基础。通常来说,事件一般是以空负载 (empty payload)消息的模式来实现的,这些消息会在消息头中包含和事件有关的一些信 息,尽管某些消息会将应用程序数据作为事件的一部分进行传送。毫不足奇的是,基于 EDA 的体系结构大多使用发布&#x2F;订阅模型,作为在系统内部广播事件的手段。</p>
+<h4 id="异构平台集成-（Heterogeneous-Platform-Integration）"><a href="#异构平台集成-（Heterogeneous-Platform-Integration）" class="headerlink" title="异构平台集成 （Heterogeneous Platform Integration）"></a>异构平台集成 （Heterogeneous Platform Integration）</h4><p>多数公司,经由合并、收购、移植或错误决策的诸多因素组合,最终会拥有种类繁多的 异构业务支撑平台、产品和语言。显然,集成这些平台是一项挑战性极强的任务,特别是 相关标准也在持续不断地发展和演变之中。消息传送机制在这些异构平台相互通信之中起 到了关键作用,无论这些平台是 Java EE 或 Microsoft .NET、Java EE 和 CICS,还是 Java EE 和 Tuxedo C++等。</p>
+<p>尽管像 Java 这样的平台可以使用 JMS API,而其他平台,比如.NET 或 C++却都无法使用 (其原因显而易见)。许多商业消息传送系统厂商和开源消息传送系统厂商都会支持 JMS API 和一个本机 API。这些提供者一般都有一个内置的消息传送桥,它允许提供者将一条<br>JMS 消息转换为内部消息,反之亦然。某些平台,比如说.NET,可能会需要一个外部消 息传送桥,将一条 JMS 消息转换为 MSMQ 消息(这取决于您所使用的消息提供者)。例 如,ActiveMQ 就提供了一个消息传送桥,用于将 MSMQ 消息转换为 JMS 格式(反之亦 然)。这种低级的平台集成已经引发了范围更广的集成热潮,比如著名的企业应用集成 (Enterprise Application Integration)等。</p>
+<h4 id="企业应用集成（Enterprise-Application-Integration）"><a href="#企业应用集成（Enterprise-Application-Integration）" class="headerlink" title="企业应用集成（Enterprise Application Integration）"></a>企业应用集成（Enterprise Application Integration）</h4><p>大多数成熟的组织都同时拥有遗留(legacy)应用系统和新的应用系统,这些系统都是独 立实现的,而且无法实现互操作。很多时候,各个组织都会有将这些应用系统集成起来的 强烈需求,以便它们能够在大规模企业运行中共享信息并实现协作。这些应用系统的集成 通常称为企业应用集成(Enterprise Application Integration,EAI)。</p>
+<p>虽然 EAI 使用了大量的厂商提供的和自己开发的解决方案,但是,企业消息传送系统仍然 是大多数解决方案的主流。企业消息传送系统允许烟囱式(stovepipe)应用系统(由异构 产品、技术与组件等组成)和事件进行通信并交换数据,同时还保持物理上的独立。数据 和事件可以通过主题或队列以消息的形式进行交换,它们提供了可以实现各个参与应用系 统去耦的一个抽象。</p>
+<p>举例来说,一个消息传送系统可能会被用于实现一个因特网订单处理系统和像 SAP 这样 的企业资源规划(Enterprise Resource Planning,ERP)系统的集成。该因特网系统使用 JMS 向一个主题传送有关新订单的业务数据。而一个 ERP 网关应用程序,它通过本机 API 访 问一个 SAP 应用程序,能够订阅该订单主题。当新订单广播到该主题时,网关就会接收 到这个订单,并将它们纳入 SAP 应用程序的处理之中。</p>
+<h4 id="企业到企业（Business-to-Business）"><a href="#企业到企业（Business-to-Business）" class="headerlink" title="企业到企业（Business-to-Business）"></a>企业到企业（Business-to-Business）</h4><p>历史上,企业曾使用电子数据交换(Electronic Data Interchange,EDI)系统来交换数据。 数据严格使用固定的格式,通过专用增值网络(Value-Added Network,VAN)来实现交换。 这种接入的成本很高,而且数据通常是以批处理的方式,而不是以实时业务事件的方式来 进行交换的。</p>
+<p>因特网、XML 和现代消息传送系统已经从根本上改变了在如今称为企业到企业 (Business-to-Business,B2B)的系统中,如何进行业务数据交换和交互的状况。使用消 息传送系统是现代 B2B 解决方案的主流趋势,因为它允许各个组织相互协作,而无须将 它们的业务系统紧密集成起来。此外,它还降低了接入门槛,因为细粒度(finer-grained) 的参与已经成为可能。根据和企业相结合的队列和主题的不同,它们既可以加入到 B2B 之中,也可以自由退出。<br>举个例子,一个制造商能够建立一个关于原料招标广播请求的主题。各家供应商都可以订 阅该主题,并通过向该制造商队列生产消息而实现响应。制造商可以根据意愿添加和删除 供应商,而且,关于各类存货和原料的新主题和队列,也可以用以正确区分各个系统。</p>
+<h4 id="地理分散（Geographic-Dispersion）"><a href="#地理分散（Geographic-Dispersion）" class="headerlink" title="地理分散（Geographic Dispersion）"></a>地理分散（Geographic Dispersion）</h4><p>如今,很多公司在地理上都是分散的。所有的砖墙加灰泥式的(brick-and-mortar)传统实 体公司、鼠标加灰泥式的(click-and-mortar)新型公司及时兴的网络化(dot-coms)公司 都面临着和企业系统地理分散有关的诸多问题。比如,远程仓库中的存货系统需要和位于 公司总部的集中式内部 ERP 系统进行通信;由各个子公司本地管理的敏感雇员数据需要 和总公司实现同步等。JMS 消息传送系统能够确保地理上分散的业务数据交换的安全性和 可靠性。</p>
+<h4 id="信息广播-（Information-Broadcasting）"><a href="#信息广播-（Information-Broadcasting）" class="headerlink" title="信息广播 （Information Broadcasting）"></a>信息广播 （Information Broadcasting）</h4><p>拍卖网站、股票报价服务和证券交易,所有这些应用都必须将数据以一对多的方式推送给 堪称海量的接收者。在许多情况下,广播信息都需要各个接收者逐一选择路由和过滤。当 输出信息要以一对多的方式进行传送时,经常要将对这种信息的响应发回给广播者。这是 企业消息传送非常适用的另一种情况,因为发布&#x2F;订阅模型可以用于发布消息,而 p2p 模 型则可以用于响应。</p>
+<p>在这些情况下,传送可靠性的选择成了关键因素。举例来说,在广播股票报价时绝对地保 证信息传送,这可能并不是最重要的,因为同一股票代码很可能会在较短的时间间隔内进 行另一次广播。然而,在交易者通过购买订单对报价做出响应的情况下,以保证的 (guaranteed)方式返回响应是至关重要的。此时,您需要综合利用消息传送机制的可靠 性,因为发布&#x2F;订阅模型分发速度很快但并不可靠,而使用 p2p 模型从交易者处购买订单 则是非常可靠的。JMS 和企业消息传送为发布&#x2F;订阅和 p2p 这两种模型都提供了不同程度 的可靠性。</p>
+<h4 id="构建动态系统（Building-Dynamic-Systems）"><a href="#构建动态系统（Building-Dynamic-Systems）" class="headerlink" title="构建动态系统（Building Dynamic Systems）"></a>构建动态系统（Building Dynamic Systems）</h4><p>在 JMS 中,发布&#x2F;订阅主题和 p2p 队列是集中管理的,并都称为 JMS 受管对象。您的应用 程序和另一个应用程序通信时,并不用知道各个主题或队列的网络位置;它仅仅将主题和 队列对象作为标识符使用而已。使用主题和队列为 JMS 应用程序提供了一定程度的位置 透明性和灵活性,这使得在一个企业系统中添加和删除参与者成为可能。</p>
+<p>举例来说,一个系统管理员能够在按需添加的基础上,动态地向特定主题添加订阅者。一 个常见的场景可能会是:您是否发现需要为特定的消息而不是其他消息添加一个审计跟踪 (audit-trail)机制。下图显示了您如何只通过订阅您所感兴趣的主题,来插入一个专用 的审计和日志记录 JMS 客户端。这个客户端唯一的工作就是跟踪特定的消息。</p>
+<p><img src="/Protocol/JMS-Protocol/%E5%8A%A8%E6%80%81%E7%B3%BB%E7%BB%9F.png" srcset="/img/loading.gif" lazyload alt="动态系统.png"></p>
+<p>企业系统有了添加和删除生产者、消费者的能力,就可以在一个已经部署好的环境中,动态改变消息路由并重新选择路由。</p>
+<p>在上图中,其他 JMS 应用程序(A 和 B)还订阅了采购订单主题,并独立进行处理。应 用程序 A 可能是公司内的一个遗留应用程序,而应用程序 B 则可能是另一家公司的业务 系统,以此来表示 B2B 集成。</p>
+<p>我们也可以在前面讨论的 EAI 场景上来构建另外一个例子。在这个例子中,一个网关接收 输入的采购订单,将它们转换为适用于遗留 ERP 系统的格式,并调入 ERP 系统进行处理 (参见下图)。</p>
+<p><img src="/Protocol/JMS-Protocol/%E5%8A%A8%E6%80%81%E7%B3%BB%E7%BB%9F2.png" srcset="/img/loading.gif" lazyload alt="动态系统2.png"></p>
+<p>使用 JMS 从这个流程中添加和删除应用程序,这是非常容易的。例如,如果需要处理来 源不同的采购订单,比如一个来自基于因特网的系统,而另一个则来自遗留的 EDI 系统, 只需要将遗留采购订单系统加入混合系统之中即可(参见下图)</p>
+<p><img src="/Protocol/JMS-Protocol/%E5%8A%A8%E6%80%81%E7%B3%BB%E7%BB%9F3.png" srcset="/img/loading.gif" lazyload alt="动态系统3.png"></p>
+<p>这个例子有意思之处就在于,ERP 网关并未意识到,它是从两个完全不同的来源接收到采 购订单消息。遗留 EDI 系统可以是一个比较旧的内部系统,或者是一个业务伙伴或新近并 购的一家子公司的主系统。此外,还可以动态地将遗留 EDI 系统添加进去,而不需要关机 和重组整个系统。企业消息传送系统使得这种灵活性成为可能,同时,JMS 还允许 Java 客户端使用相同的 Java 编程模型来访问多个不同的消息传送系统。</p>
+<h3 id="RPC-和异步消息传送（RPC-Versus-Asynchronous-Messaging）"><a href="#RPC-和异步消息传送（RPC-Versus-Asynchronous-Messaging）" class="headerlink" title="RPC 和异步消息传送（RPC Versus Asynchronous Messaging）"></a>RPC 和异步消息传送（RPC Versus Asynchronous Messaging）</h3><p>RPC(Remote Procedure Call,远程过程调用)是通常用于描述分布式计算模型的术语, 现在 Java 和.NET 这两种平台都在使用这个术语。基于组件的体系结构,比如企业级 JavaBean(Enterprise JavaBeans,EJB),就是建立在这个模型基础之上的。对于许多应用程 序来说,基于 RPC 的技术已经是,并且将继续是切实可行的解决方案。不过,企业消息 传送模型在特定类型的分布式应用程序中表现更为出色。</p>
+<h4 id="紧密耦合的-RPC-（Tightly-Coupled-RPC）"><a href="#紧密耦合的-RPC-（Tightly-Coupled-RPC）" class="headerlink" title="紧密耦合的 RPC （Tightly Coupled RPC）"></a>紧密耦合的 RPC （Tightly Coupled RPC）</h4><p>紧密耦合的 RPC 模型最为成功的一个领域就是构建 3 层或 n 层应用程序。在这个模型中, 表示层(第 1 层)使用 RPC 和中间层(第 2 层)的业务逻辑进行通信,访问位于后端(第 3 层)的数据。Sun Microsystems 公司的 J2EE 平台和 Microsoft 公司的.NET 平台是这种体 系结构最为先进的范例。</p>
+<p>使用 J2EE、JSP 和 servlet 描述的是表示层,而企业级 JavaBean(EJB)则是中间层。抛开 平台不论,这些系统使用的核心技术是基于成为定义通信范例的 RPC 的中间件。</p>
+<p>RPC 试图模仿在一个进程中运行的某个系统的行为。在调用一个远程过程时,调用者将被 阻塞,直到该过程完成并将控制权返回给调用者。从开发者的角度看,这种同步模型使得 该系统就好像运行在一个进程当中。这些工作会依次完成,同时确保以预定顺序完成。RPC 同步的本质特性,将客户端(进行调用的软件)和服务器(为该调用服务的软件)二者紧 密耦合在一起。因为客户端已被阻塞,所以它无法继续进行工作,直到服务器做出响应为 止。</p>
+<p>RPC 紧密耦合的本质特性导致出现了相互高度依赖的系统,其中一个系统的失效会对其他 系统产生立竿见影的弱化影响。例如,在 J2EE 中,如果期望使用企业级 bean 的 servlet 顺利工作,EJB 服务器就必须正常地发挥功能。<br>虽然 RPC 在许多场景中表现优秀,但是在系统对系统(system-to-system)的处理过程当 中,它的同步、紧密耦合等本质特性却是一个严重的缺陷,因为“系统对系统”有很多垂 直的应用程序集成在一起。在系统对系统场景中,垂直系统之间的通信线路不仅数量众多, 而且方向也是错综复杂的,如下图所示</p>
+<p><img src="/Protocol/JMS-Protocol/RPC%E7%B3%BB%E7%BB%9F.png" srcset="/img/loading.gif" lazyload alt="RPC系统.png"></p>
+<p>让我们设想一下使用紧密耦合的 RPC 机制实现这种基础设施所面临的挑战。这些系统之 间的连接管理是多对多(many-to-many)的问题。当您向混合系统中加入另一个应用程序 时,您不得不回过头来让其余所有的系统都知道它,而且,这些系统也会崩溃(crash)。 它们仍然需要预定停工时间(scheduled downtime),而且对象的接口也需要升级。<br>当该系统的一部分中断运行时,一切都得停止。当您向一个订单输入系统添加订单时,它 要对其他系统逐个进行同步调用。这会导致订单输入系统发生阻塞,并一直等待,直到每 个系统都处理完该订单时为止。<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="像 CORBA 单向调用这种多线程的、松散的 RPC 机制也是一种选择,不过,这些解决方 案自身非常复杂,而且它们还需要成熟完善的开发。当没有“明智地”使用线程时,它 们的开销很大,而且在出现故障的情况下,CORBA 单向调用仍然需要进行应用程序级 (application-level)错误处理。
+">[1]</span></a></sup></p>
+<p>正是 RPC 系统的同步、紧密耦合、相互依赖等本质特性,使得子系统中出现的故障最终 会导致整个系统的失效。就像在“系统对系统”场景中那样,当 RPC 紧密耦合的本质特 性不再适用时,消息传送机制为此提供了另一种选择方案。</p>
+<h4 id="企业消息传送-Enterprise-Messaging"><a href="#企业消息传送-Enterprise-Messaging" class="headerlink" title="企业消息传送 (Enterprise Messaging)"></a>企业消息传送 (Enterprise Messaging)</h4><p>各个子系统在可用性方面存在的问题,并不是使用面向消息的中间件所带来的后果。消息 传送机制的一个基本思想就是:规定应用程序之间的通信应该采用异步方式。将各部分连 接在一起的代码会假定这是一条单向消息,它不需要立即从另一个应用程序那里得到响 应。换句话说,也就是没有出现阻塞现象。一旦一条消息被发出,消息传送客户端就能够 转向其他任务;它不必等待对这条消息的响应。这是 RPC 和异步消息传送之间的主要区 别,而且,它对于理解消息传送系统的优点来说至关重要。</p>
+<p>在一个异步消息传送系统当中,每个子系统(收款、存货等)都不存在和其他系统的耦合 (参见下图)。它们通过消息传送服务器进行通信,因此,某个子系统出现故障,并不 会妨碍其他子系统的运行。</p>
+<p><img src="/Protocol/JMS-Protocol/%E4%BC%81%E4%B8%9A%E6%B6%88%E6%81%AF%E4%BC%A0%E9%80%81.png" srcset="/img/loading.gif" lazyload alt="企业消息传送.png"></p>
+<p>在网络化系统中会出现局部故障,这是一个不可避免的事实。其中的一个系统,可能会在 其连续运行期间的某个时刻,发生不可预测的故障,或者需要停机。这种现象可能会由于 内部系统和合作系统地理上的分散而被进一步放大。考虑到这个因素,JMS 提供了保证传 送(guaranteed delivery)方式,它可以确保即便发生了局部故障,预定消费者最终也会接 收到这条消息。</p>
+<p>保证传送使用的是一种“保存并转发(store-and-forward)”的机制,这就意味着,如果预 定消费者当前并不可用,底层消息服务器就会将输入的消息写到一个持久存储器 (persistent store)之中。随后,当该接收应用程序变为可用时,“保存并转发”机制会把 预定消费者在不可用时错过的所有消息传送给它们(参见下图)。</p>
+<p><img src="/Protocol/JMS-Protocol/%E4%BF%9D%E5%AD%98%E5%B9%B6%E8%BD%AC%E5%8F%91%E6%9C%BA%E5%88%B6.png" srcset="/img/loading.gif" lazyload alt="保存并转发机制.png"></p>
+<p>概括来说,JMS 不仅仅是另外一种事件服务。它的设计涵盖了范围极广的企业应用程序, 包括 EAI、B2B 和推送模型等。通过异步处理、“保存并转发”及“保证传送”机制,它 为保持业务应用程序连续运行并实现不间断服务提供了很高的可用性。它还通过发布&#x2F;订 阅功能和点对点功能,提供了集成灵活性。通过位置透明和管理控制,它提供了一种健壮 的、基于服务的体系结构。而且,最重要的是,它非常易于学习和使用。</p>
+<section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>像 CORBA 单向调用这种多线程的、松散的 RPC 机制也是一种选择,不过,这些解决方 案自身非常复杂,而且它们还需要成熟完善的开发。当没有“明智地”使用线程时,它 们的开销很大,而且在出现故障的情况下,CORBA 单向调用仍然需要进行应用程序级 (application-level)错误处理。
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Protocol/">Protocol</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JMS/">JMS</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/RabbitMQ/Make-a-Simple-RPC-by-RabbitMQ/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">RabbitMQ 实现简单的RPC</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Java/Java-Class-init/">
+                        <span class="hidden-mobile">JAVA类初始化</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/ivivisoft" target="_blank" rel="nofollow noopener"><span>IvIvI</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -1,0 +1,620 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=light>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Andy Zhang">
+  <meta name="keywords" content="Java, Programming">
+  
+    <meta name="description" content="小程序Icon图标的几种实现方案小程序原生提供的Icon组件 属性   属性 类型 默认值 必填 说明    type string  是 icon的类型，有效值：success, success_no_circle, info, warn, waiting, cancel, download, search, clear   size number&#x2F;string 23 否 icon的大">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信小程序Icon图标的几个实现方案">
+<meta property="og:url" content="https://ivivisoft.com/Wechat/wechat-icon/index.html">
+<meta property="og:site_name" content="IvIvI">
+<meta property="og:description" content="小程序Icon图标的几种实现方案小程序原生提供的Icon组件 属性   属性 类型 默认值 必填 说明    type string  是 icon的类型，有效值：success, success_no_circle, info, warn, waiting, cancel, download, search, clear   size number&#x2F;string 23 否 icon的大">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/11/15/JFTBEusxnKaQ8D4.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/15/7BH5gdkbLynrfM3.png">
+<meta property="article:published_time" content="2022-03-02T10:41:21.000Z">
+<meta property="article:modified_time" content="2022-03-02T10:44:31.547Z">
+<meta property="article:author" content="Andy Zhang">
+<meta property="article:tag" content="Icon">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://i.loli.net/2021/11/15/JFTBEusxnKaQ8D4.png">
+  
+  
+  <title>微信小程序Icon图标的几个实现方案 - IvIvI</title>
+  <!-- anti-flicker snippet (recommended)  -->
+<style>.async-hide { opacity: 0 !important} </style>
+<script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
+h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
+(a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
+})(window,document.documentElement,'async-hide','dataLayer',4000,
+{'GTM-T9HKC8K':true});</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-T9HKC8K');</script>
+  <!-- End Google Tag Manager -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8488991078175700"
+     crossorigin="anonymous"></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"ivivisoft.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="IvIvI" type="application/atom+xml">
+</head>
+
+
+<body>
+  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T9HKC8K"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>IvIvI</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.2)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="微信小程序Icon图标的几个实现方案">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-03-02 18:41" pubdate>
+        2022年3月2日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      6.7k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      56 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">微信小程序Icon图标的几个实现方案</h1>
+            
+            <div class="markdown-body">
+              <h2 id="小程序Icon图标的几种实现方案"><a href="#小程序Icon图标的几种实现方案" class="headerlink" title="小程序Icon图标的几种实现方案"></a>小程序Icon图标的几种实现方案</h2><h3 id="小程序原生提供的Icon组件"><a href="#小程序原生提供的Icon组件" class="headerlink" title="小程序原生提供的Icon组件 "></a>小程序原生提供的<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/component/icon.html">Icon组件 </a></h3><h5 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h5><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>类型</th>
+<th>默认值</th>
+<th>必填</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>type</td>
+<td>string</td>
+<td></td>
+<td>是</td>
+<td>icon的类型，有效值：success, success_no_circle, info, warn, waiting, cancel, download, search, clear</td>
+</tr>
+<tr>
+<td>size</td>
+<td>number&#x2F;string</td>
+<td>23</td>
+<td>否</td>
+<td>icon的大小</td>
+</tr>
+<tr>
+<td>color</td>
+<td>string</td>
+<td></td>
+<td>否</td>
+<td>icon的颜色，同css的color</td>
+</tr>
+</tbody></table>
+<h5 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h5><h6 id="组件size属性的长度单位默认为px，2-4-0起支持传入单位-rpx-x2F-px"><a href="#组件size属性的长度单位默认为px，2-4-0起支持传入单位-rpx-x2F-px" class="headerlink" title="组件size属性的长度单位默认为px，2.4.0起支持传入单位(rpx&#x2F;px)"></a>组件size属性的长度单位默认为px，<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/framework/compatibility.html">2.4.0</a>起支持传入单位(rpx&#x2F;px)</h6><ol>
+<li>PX 数值类型，默认使用，什么单位都不填，只写一个数值就可以</li>
+<li>RPX（Responsive Pixel）屏幕自适应单位，他将屏幕分为750个单位，每个单位是1&#x2F;750。</li>
+</ol>
+<img src="https://i.loli.net/2021/11/15/JFTBEusxnKaQ8D4.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" />
+
+<p>比方说：iphone6的屏幕宽度是350px，每个rpx就是0.5px。也就是说如果我们在iphone6机器上将size的值设置为60rpx，他与设置为30或者30px的效果是一样的。</p>
+<h6 id="组件color属性是改变图标所有像素点的颜色"><a href="#组件color属性是改变图标所有像素点的颜色" class="headerlink" title="组件color属性是改变图标所有像素点的颜色"></a>组件color属性是改变图标所有像素点的颜色</h6><h4 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h4><h5 id="图标与文本能否放在同一行中？"><a href="#图标与文本能否放在同一行中？" class="headerlink" title="图标与文本能否放在同一行中？"></a>图标与文本能否放在同一行中？</h5><p>可以的，图标本身就是为了更好的布局和更方便使用而诞生的。代码如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;font-size: 17px;margin-top: 20px;&quot;</span>&gt;</span><br>    我是一行文字，<span class="hljs-tag">&lt;<span class="hljs-name">icon</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;success&quot;</span> <span class="hljs-attr">size</span>=<span class="hljs-string">&quot;15&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">icon</span>&gt;</span>我里面包含了图标！<br><span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="有时候真机上Icon显示空白"><a href="#有时候真机上Icon显示空白" class="headerlink" title="有时候真机上Icon显示空白"></a>有时候真机上Icon显示空白</h5><p>首先此问题肯定不是由于字体文件链接没有加入小程序的安全域名，WXSS加载图片及字体允许外域！如果图标是自定义实现的，要检查一下机型及嵌入的字体文件类型，可能是兼容性引起的，在小程序中推荐使用TTF和WOFF格式的字体。如果使用的是这两种字体，情况依然存在，可以考虑换SVG格式的数据嵌入。</p>
+<h5 id="weui组件库里的icon组件的图标如何取出来，保存在本地？"><a href="#weui组件库里的icon组件的图标如何取出来，保存在本地？" class="headerlink" title="weui组件库里的icon组件的图标如何取出来，保存在本地？"></a>weui组件库里的icon组件的图标如何取出来，保存在本地？</h5><p>直接可以打开<a target="_blank" rel="noopener" href="https://weui.io/">weui官网</a>，然后通过浏览器开发者工具查看源码，找到资源地址然后下载。或者在<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/design/#%E5%9B%BE%E6%A0%87">微信的官方文档上下载</a>。</p>
+<h5 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h5><p>开箱即用。</p>
+<h5 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h5><p>只支持success, success_no_circle, info, warn, waiting, cancel, download, search, clear这几种类型，远远不能满足开发需求。</p>
+<h3 id="自定义实现图标"><a href="#自定义实现图标" class="headerlink" title="自定义实现图标"></a>自定义实现图标</h3><h4 id="直接使用图片"><a href="#直接使用图片" class="headerlink" title="直接使用图片"></a>直接使用图片</h4><h5 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h5><p>简单粗暴，每个图标对应一个图片。</p>
+<h5 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h5><ol>
+<li>图片在文本中不方便布局。不方便修改颜色。</li>
+<li>图片不能升缩，放大之后会变虚、有锯齿。</li>
+<li>图片需要在本地或者网络上存储，这样将导致大量HTTP请求，使得页面加载速度变慢。</li>
+<li>使用起来不如图标只使用一个名称那么方便。</li>
+</ol>
+<h4 id="使用精灵图"><a href="#使用精灵图" class="headerlink" title="使用精灵图"></a>使用精灵图</h4><p>Sprite，连续图片集，以非重叠、最小化分布的方式排列成一张图片。每次使用的时候通过纵横显示的起始坐标及区域大小，以达到动态切换的效果。</p>
+<img src="https://i.loli.net/2021/11/15/7BH5gdkbLynrfM3.png" srcset="/img/loading.gif" lazyload alt="2" style="zoom: 33%;" />
+
+<h5 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h5><p>通过精灵图实现一个爆炸效果。图片大小为（650x650） px；所以每一个小图标大小为（130x130）px；这是css样式设置的width和height为130px的原因，也是js代码移动step设置为130的原因。js中left和top均为负数，这是由于这里不是显示图标的坐标，而是背景图片所要向左上方移动的距离。</p>
+<p><strong>注意：在wxss中只可以使用网络图片，不能使用本地图片！</strong></p>
+<p>代码如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-comment">&lt;!--icon.wxml--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">view</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">icon</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;sprite scale&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;background-position: &#123;&#123;left&#125;&#125; &#123;&#123;top&#125;&#125;;&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">icon</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-comment">/* icon.wxss */</span><br><span class="hljs-selector-class">.sprite</span>&#123;<br>    <span class="hljs-attribute">display</span>: block;<br>    <span class="hljs-attribute">width</span>: <span class="hljs-number">130px</span>;<br>    <span class="hljs-attribute">height</span>: <span class="hljs-number">130px</span>;<br>    <span class="hljs-attribute">background</span>: <span class="hljs-built_in">url</span>(<span class="hljs-string">&quot;https://i.loli.net/2021/11/15/7BH5gdkbLynrfM3.png&quot;</span>) no-repeat;<br>&#125;<br><span class="hljs-selector-class">.scale</span>&#123;<br>    <span class="hljs-attribute">transform-origin</span>: <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">scale</span>(<span class="hljs-number">2</span>,<span class="hljs-number">2</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// icon.js</span><br><span class="hljs-title class_">Page</span>(&#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 页面的初始数据</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-attr">data</span>: &#123;<br>        <span class="hljs-attr">left</span>:<span class="hljs-string">&#x27;0px&#x27;</span>,<br>        <span class="hljs-attr">top</span>:<span class="hljs-string">&#x27;0px&#x27;</span>,<br>    &#125;,<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 生命周期函数--监听页面加载</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-attr">onLoad</span>: <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">var</span> that = <span class="hljs-variable language_">this</span>;<br>        <span class="hljs-keyword">var</span> left = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">var</span> top = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">const</span> step = <span class="hljs-number">130</span>;<br>        <span class="hljs-keyword">const</span> stop = (<span class="hljs-number">650</span>-<span class="hljs-number">130</span>);<br>        <span class="hljs-keyword">var</span> i = <span class="hljs-built_in">setInterval</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>             <span class="hljs-keyword">if</span> (left &gt;= stop &amp;&amp; top &gt;=stop) &#123;<br>                  <span class="hljs-built_in">clearInterval</span>(i)<br>             &#125; <span class="hljs-keyword">else</span> &#123;<br>                left += step;<br>                <span class="hljs-keyword">if</span>(left &gt;= <span class="hljs-number">650</span>)&#123;<br>                    left = <span class="hljs-number">0</span>;<br>                    top += step;<br>                &#125;<br>                that.<span class="hljs-title function_">setData</span>(&#123;<br>                    <span class="hljs-attr">left</span>: <span class="hljs-string">&#x27;-&#x27;</span> + left +<span class="hljs-string">&#x27;px&#x27;</span>,<br>                    <span class="hljs-attr">top</span>: <span class="hljs-string">&#x27;-&#x27;</span> + top +<span class="hljs-string">&#x27;px&#x27;</span><br>                  &#125;)<br>             &#125;<br>        &#125;, <span class="hljs-number">100</span>)<br>    &#125;,<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+
+
+<h5 id="优点-2"><a href="#优点-2" class="headerlink" title="优点"></a>优点</h5><ol>
+<li>在加载的时候，只加载一次。减少了HTTP请求。</li>
+</ol>
+<h4 id="使用CSS样式绘制"><a href="#使用CSS样式绘制" class="headerlink" title="使用CSS样式绘制"></a>使用CSS样式绘制</h4><h5 id="使用示例-1"><a href="#使用示例-1" class="headerlink" title="使用示例"></a>使用示例</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">view</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">icon</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;icon-close&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">icon</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.icon-close</span>&#123;<br>    <span class="hljs-attribute">display</span>: inline-block;<br>    <span class="hljs-attribute">width</span>: <span class="hljs-number">17px</span>;<br>    <span class="hljs-attribute">height</span>: <span class="hljs-number">2px</span>;<br>    <span class="hljs-attribute">background</span>: red;<br>    <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">rotate</span>(<span class="hljs-number">45deg</span>);<br>&#125;<br><span class="hljs-selector-class">.icon-close</span><span class="hljs-selector-pseudo">::after</span> &#123;<br>    <span class="hljs-attribute">content</span>: <span class="hljs-string">&#x27;&#x27;</span>;<br>    <span class="hljs-attribute">display</span>: block;<br>    <span class="hljs-attribute">width</span>: <span class="hljs-number">17px</span>;<br>    <span class="hljs-attribute">height</span>: <span class="hljs-number">2px</span>;<br>    <span class="hljs-attribute">background</span>: red;<br>    <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">rotate</span>(-<span class="hljs-number">90deg</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h5 id="缺点-2"><a href="#缺点-2" class="headerlink" title="缺点"></a>缺点</h5><ol>
+<li>每个图标都需要写CSS样式代码，劳动量大。</li>
+<li>这种图标不是字符，每个图标在绘制时要统一一个中心点，不然使用起来控制位置会比较麻烦。</li>
+<li>大小与颜色也不方便控制。所以这并不是一种好的图标方案。</li>
+</ol>
+<h4 id="使用矢量字体-（推荐使用）"><a href="#使用矢量字体-（推荐使用）" class="headerlink" title="使用矢量字体 （推荐使用）"></a>使用矢量字体 （推荐使用）</h4><p>当浏览器渲染一个字符的时候，首先看font-family样式，确定使用字体名是哪一个。接着以此字符的Unicode在字体文件里查找对应的字符信息。</p>
+<p>字体类型有两种，一种是点阵字体，一种是矢量字体。现在使用最广泛的是矢量字体。矢量字体大概分成三类：Adobe主导的Type1、Apple和Microsoft主导的TrueType、Adobe，Apple和Microsoft共同主导的开源字体OpenType。</p>
+<p>在矢量字体里面每个Unicode只是每个字符的一个索引，每个字符描述信息是一个几何矢量绘图描述信息。以Type1为例，它使用三次贝塞尔曲线来绘制字形。TrueType则使用二次贝塞尔曲线描述字形。正是由于矢量字体是绘制出来的，所以它可以实时填充任何颜色，并且可以无极缩放而没有锯齿。</p>
+<p><a target="_blank" rel="noopener" href="https://iconfont.cn/">阿里巴巴的图标网站</a>，我们可以在此网站上搜索到任何图片在线编辑，并下载样式文件，在小程序里面使用。</p>
+<p>字体源说明：</p>
+<ol>
+<li>EOT是微软IE浏览器专用的OpenType字体类型。</li>
+<li>TTF是TrueType字体。</li>
+<li>WOFF与WOFF2是移动开发专用的矢量字体格式。是对三种矢量字体格式的再封装。</li>
+</ol>
+<p>链接各种字体文件源可以兼容不同浏览器宿主环境。浏览器会选择自己支持的格式，从列表中的第一个开始尝试加载。一旦获得一个可以使用的，就不会再加载剩下的字体格式了。小程序里面建议使用TTF和WOFF这两个格式。WOFF2在低版本的IOS设备上会有不兼容的问题。</p>
+<h5 id="使用示例可以参考此文章"><a href="#使用示例可以参考此文章" class="headerlink" title="使用示例可以参考此文章"></a>使用示例可以参考<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/25db60f77531">此文章</a></h5><h4 id="使用SVG矢量文件"><a href="#使用SVG矢量文件" class="headerlink" title="使用SVG矢量文件"></a>使用SVG矢量文件</h4><p>很多作图软件都可以导出SVG格式的矢量文件，比方说<a target="_blank" rel="noopener" href="https://www.sketch.com/">Sketch</a>，但是它导出的SVG格式的矢量文件有没有用的垃圾信息。可以到<a target="_blank" rel="noopener" href="https://iconfont.cn/">阿里巴巴的图标网站</a>编辑好之后下载SVG格式的矢量文件，它不带什么垃圾信息。然后我们拿这个文件找一个Image2base64工具，将文件内容转化为base64的字符串。然后就可以在小程序里使用这个base64的字符串作为图片源，实现自定义图标了。</p>
+<h5 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h5><ol>
+<li>准备SVG图片</li>
+</ol>
+<p><svg t="1636971106558" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1338" width="200" height="200"><path d="M326.2 429.7L710 428 525.4 892.1z" fill="#83A4FF" p-id="1339"></path><path d="M370.2 271.1l292.4 2.6 51.7 113-379.5-2.6z" fill="#FF7E71" p-id="1340"></path><path d="M296.1 380.7L64.9 284.1l124.2-92.3 148.4 76.7z" fill="#A4BEFF" p-id="1341"></path><path d="M64.9 330.5L284 428l235.5 460.6zM755.6 427.1L960.9 321 528.8 886z" fill="#5B79FB" p-id="1342"></path><path d="M751.3 379.8l-57.8-119 132-73.4 113.8 95.8z" fill="#A4BEFF" p-id="1343"></path><path d="M365.8 233.4l-50-12.9-94-52.7 110.4-39.6h360.6l109.5 45.7-105.2 50.9-35.4 8.6z" fill="#C7D8FF" p-id="1344"></path></svg></p>
+<ol start="2">
+<li><p>使用<a target="_blank" rel="noopener" href="https://www.sojson.com/image2base64.html">线上Image2base64</a>转换图片为：</p>
+<figure class="highlight svg"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs svg">data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNjM2OTcwNTk4NjAyIiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjI2MDAiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCI+PGRlZnM+PHN0eWxlIHR5cGU9InRleHQvY3NzIj48L3N0eWxlPjwvZGVmcz48cGF0aCBkPSJNMzI2LjIgNDI5LjdMNzEwIDQyOCA1MjUuNCA4OTIuMXoiIGZpbGw9IiM4M0E0RkYiIHAtaWQ9IjI2MDEiPjwvcGF0aD48cGF0aCBkPSJNMzcwLjIgMjcxLjFsMjkyLjQgMi42IDUxLjcgMTEzLTM3OS41LTIuNnoiIGZpbGw9IiNGRjdFNzEiIHAtaWQ9IjI2MDIiPjwvcGF0aD48cGF0aCBkPSJNMjk2LjEgMzgwLjdMNjQuOSAyODQuMWwxMjQuMi05Mi4zIDE0OC40IDc2Ljd6IiBmaWxsPSIjQTRCRUZGIiBwLWlkPSIyNjAzIj48L3BhdGg+PHBhdGggZD0iTTY0LjkgMzMwLjVMMjg0IDQyOGwyMzUuNSA0NjAuNnpNNzU1LjYgNDI3LjFMOTYwLjkgMzIxIDUyOC44IDg4NnoiIGZpbGw9IiM1Qjc5RkIiIHAtaWQ9IjI2MDQiPjwvcGF0aD48cGF0aCBkPSJNNzUxLjMgMzc5LjhsLTU3LjgtMTE5IDEzMi03My40IDExMy44IDk1Ljh6IiBmaWxsPSIjQTRCRUZGIiBwLWlkPSIyNjA1Ij48L3BhdGg+PHBhdGggZD0iTTM2NS44IDIzMy40bC01MC0xMi45LTk0LTUyLjcgMTEwLjQtMzkuNmgzNjAuNmwxMDkuNSA0NS43LTEwNS4yIDUwLjktMzUuNCA4LjZ6IiBmaWxsPSIjQzdEOEZGIiBwLWlkPSIyNjA2Ij48L3BhdGg+PC9zdmc+<br></code></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>编写代码</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.svg-icon</span>&#123;<br>    <span class="hljs-attribute">display</span>: block;<br>    <span class="hljs-attribute">width</span>: <span class="hljs-number">200px</span>;<br>    <span class="hljs-attribute">height</span>: <span class="hljs-number">200px</span>;  <br>    <span class="hljs-attribute">background-repeat</span>: no-repeat;<br>    <span class="hljs-attribute">background</span>: <span class="hljs-built_in">url</span>(<span class="hljs-string">&quot;data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNjM2OTcwNTk4NjAyIiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjI2MDAiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCI+PGRlZnM+PHN0eWxlIHR5cGU9InRleHQvY3NzIj48L3N0eWxlPjwvZGVmcz48cGF0aCBkPSJNMzI2LjIgNDI5LjdMNzEwIDQyOCA1MjUuNCA4OTIuMXoiIGZpbGw9IiM4M0E0RkYiIHAtaWQ9IjI2MDEiPjwvcGF0aD48cGF0aCBkPSJNMzcwLjIgMjcxLjFsMjkyLjQgMi42IDUxLjcgMTEzLTM3OS41LTIuNnoiIGZpbGw9IiNGRjdFNzEiIHAtaWQ9IjI2MDIiPjwvcGF0aD48cGF0aCBkPSJNMjk2LjEgMzgwLjdMNjQuOSAyODQuMWwxMjQuMi05Mi4zIDE0OC40IDc2Ljd6IiBmaWxsPSIjQTRCRUZGIiBwLWlkPSIyNjAzIj48L3BhdGg+PHBhdGggZD0iTTY0LjkgMzMwLjVMMjg0IDQyOGwyMzUuNSA0NjAuNnpNNzU1LjYgNDI3LjFMOTYwLjkgMzIxIDUyOC44IDg4NnoiIGZpbGw9IiM1Qjc5RkIiIHAtaWQ9IjI2MDQiPjwvcGF0aD48cGF0aCBkPSJNNzUxLjMgMzc5LjhsLTU3LjgtMTE5IDEzMi03My40IDExMy44IDk1Ljh6IiBmaWxsPSIjQTRCRUZGIiBwLWlkPSIyNjA1Ij48L3BhdGg+PHBhdGggZD0iTTM2NS44IDIzMy40bC01MC0xMi45LTk0LTUyLjcgMTEwLjQtMzkuNmgzNjAuNmwxMDkuNSA0NS43LTEwNS4yIDUwLjktMzUuNCA4LjZ6IiBmaWxsPSIjQzdEOEZGIiBwLWlkPSIyNjA2Ij48L3BhdGg+PC9zdmc+&quot;</span>);<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">view</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">icon</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;svg-icon&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">icon</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="说明-1"><a href="#说明-1" class="headerlink" title="说明"></a>说明</h5><p>此种方法仍旧需要一张图片处理一次，然后在页面中引用。注意：样式文件中的width和height属性的值需要和下载的SVG文件的width和height保持一致的（在svg标签中可以看到）。</p>
+</li>
+</ol>
+<h4 id="使用Canvas绘制SVG绘制"><a href="#使用Canvas绘制SVG绘制" class="headerlink" title="使用Canvas绘制SVG绘制"></a>使用Canvas绘制SVG绘制</h4><p>这种绘制用于制作动画还是可以的，但是用来做图标有点大材小用了。<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/community/develop/article/doc/000ca493bc09c0d03a8827b9b5b013">腾讯的将SVG绘制成图像的 Cax 引擎</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Wechat/">Wechat</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Icon/">Icon</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Wechat/Wechat-Login/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">小程序登录的正确打开方式</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Spring/Transaction-Basic/">
+                        <span class="hidden-mobile">事务的基本概念</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/ivivisoft" target="_blank" rel="nofollow noopener"><span>IvIvI</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
